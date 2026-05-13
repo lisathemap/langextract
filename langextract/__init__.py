@@ -21,15 +21,17 @@ Basic usage:
     >>> result = langextract.extract(text="Paris is the capital of France.", schema={"city": str, "country": str})
 
 Note: Set the LANGEXTRACT_MODEL environment variable to override the default model.
-Defaults to "gemini-1.5-flash" if not set.
+Defaults to "gemini-1.5-pro" if not set. Switched from flash to pro for better
+extraction accuracy on complex nested schemas.
 """
 
 from langextract.core import extract
 from langextract.models import ExtractionResult, ExtractionSchema
 from langextract.version import __version__
 
-# Personal default: prefer flash model for faster/cheaper extractions during experimentation
-DEFAULT_MODEL = "gemini-1.5-flash"
+# Switched to pro model - flash was occasionally missing fields in deeply nested schemas.
+# The cost difference is acceptable for my use case (low volume, high accuracy needed).
+DEFAULT_MODEL = "gemini-1.5-pro"
 
 __all__ = [
     "extract",
