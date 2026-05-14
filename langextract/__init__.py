@@ -23,6 +23,9 @@ Basic usage:
 Note: Set the LANGEXTRACT_MODEL environment variable to override the default model.
 Defaults to "gemini-1.5-pro" if not set. Switched from flash to pro for better
 extraction accuracy on complex nested schemas.
+
+Set LANGEXTRACT_TIMEOUT to override the default request timeout (in seconds).
+Defaults to 30 seconds.
 """
 
 from langextract.core import extract
@@ -33,10 +36,14 @@ from langextract.version import __version__
 # The cost difference is acceptable for my use case (low volume, high accuracy needed).
 DEFAULT_MODEL = "gemini-1.5-pro"
 
+# Increased from the upstream default of 15s - was seeing timeouts on longer documents.
+DEFAULT_TIMEOUT = 30
+
 __all__ = [
     "extract",
     "ExtractionResult",
     "ExtractionSchema",
     "DEFAULT_MODEL",
+    "DEFAULT_TIMEOUT",
     "__version__",
 ]
